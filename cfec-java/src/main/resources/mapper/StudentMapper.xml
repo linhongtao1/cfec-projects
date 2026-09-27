@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cfec.antiepidemic.mapper.StudentMapper">
+
+    <select id="findPageByLesson" resultType="com.cfec.antiepidemic.entity.StudentUser">
+        select stu.id             as stuId,
+               stu.user_id        as userId,
+               stu.code           as code,
+               stu.name           as name,
+               stu.gender         as gender,
+               stu.phone          as phone,
+               stu.address        as address,
+               stu.guardian_name  as guardianName,
+               stu.guardian_phone as guardianPhone,
+               stu.id_code        as idCode,
+               user.memo          as memo,
+               stu.lesson_id      as lessonId,
+               user.id            as userId,
+               user.dept_id       as deptId,
+               user.username      as username,
+               user.password      as password,
+               user.status        as status,
+               user.deleted       as deleted,
+               user.nicename      as nicename,
+               user.phone         as phone,
+               user.avatar        as avatar
+        from sys_student as stu
+                 left join sys_user as user on user.id = stu.user_id
+        where stu.lesson_id = #{param2,jdbcType=VARCHAR} and user.deleted = 0
+    </select>
+</mapper>
